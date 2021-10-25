@@ -2,11 +2,18 @@
   <div class="about">
     <div class="form p-fluid">
       <h1>
+        <i class="pi pi-user" />
+        <!-- Pegando nome do store -->
         {{ $store.state.user.name }}
       </h1>
+      <h2>
+        {{ this.myname }}
+      </h2>
       <span class="p-input-icon-right p-float-label">
         <i class="pi pi-apple" />
-        <InputText type="text" id="username"v-model="myname"/>
+        <!-- v-model altera/compartilha o conteúdo da variável de um componente -->
+        <!-- v-bind altera, mas não compartilha o conteúdo da variável de um componente -->
+        <InputText type="text" id="username" v-model="myname"/>
         <label for="username">Usuário</label>
       </span>
 
@@ -17,17 +24,19 @@
 </template>
 <script>
 export default {
-  name: 'About',
-  data(){
-    return{
-      myname: ''
-    }
+  name: "About",
+  data() {
+    return {
+      myname: "Teste",
+    };
   },
   methods: {
-    saveName(){
-      console.log('Nome salvo!')
-    }
-  }
+    saveName() {
+      console.log("Nome salvo "+this.myname);
+      // alterando o nome do store
+      this.$store.commit('registerUser', this.myname);
+    },
+  },
 };
 </script>
 <style scoped>
